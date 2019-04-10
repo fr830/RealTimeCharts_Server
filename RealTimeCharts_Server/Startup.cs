@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RealTimeCharts_Server.HubConfig;
 
 namespace RealTimeCharts_Server
 {
@@ -32,6 +33,7 @@ namespace RealTimeCharts_Server
                 .AllowAnyHeader()
                 .AllowCredentials());
             });
+            services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -49,7 +51,14 @@ namespace RealTimeCharts_Server
             }
 
             app.UseHttpsRedirection();
+
             app.UseCors("CorsPolicy");
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChartHub>("/chart");
+            });
+
             app.UseMvc();
         }
     }
