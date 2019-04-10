@@ -11,6 +11,7 @@ using RealTimeCharts_Server.TimerFeatures;
 
 namespace RealTimeCharts_Server.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ChartController : ControllerBase
@@ -25,6 +26,7 @@ namespace RealTimeCharts_Server.Controllers
         public IActionResult Get()
         {
             var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData()));
+
             return Ok(new { Message = "Request Completed" });
         }
     }

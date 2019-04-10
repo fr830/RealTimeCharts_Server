@@ -28,7 +28,7 @@ namespace RealTimeCharts_Server
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("Https://localhost:4200")
+                options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
