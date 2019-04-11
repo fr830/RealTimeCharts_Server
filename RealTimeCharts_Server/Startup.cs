@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RealTimeCharts_Server.HubConfig;
+using StackExchange.Redis;
 
 namespace RealTimeCharts_Server
 {
@@ -36,6 +37,7 @@ namespace RealTimeCharts_Server
             });
             services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IConnectionMultiplexer>(x => ConnectionMultiplexer.Connect("localhost"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
